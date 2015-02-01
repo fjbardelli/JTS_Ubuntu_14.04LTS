@@ -246,7 +246,9 @@ function install_aditional_packages() {
     echo "18.6. Instalar Vim.............."; apt-get install vim
     echo "18.7. Instalar Nano............."; apt-get install nano
     echo "18.8. Instalar pear............."; apt-get install php-pear
-    echo "18.9. Instalar PHPUnit..........";
+    echo "18.9. Instalar Htop............."; apt-get install htop
+    echo "18.10. Instalar MC............."; apt-get install mc
+    echo "18.11. Instalar PHPUnit..........";
     pear config-set auto_discover 1
     mv phpunit-patched /usr/share/phpunit
     echo include_path = ".:/usr/share/phpunit:/usr/share/phpunit/PHPUnit" >> /etc/php5/apache2/php.ini
@@ -334,7 +336,30 @@ function final_step() {
     fi
 }
 
+# 26. Mono Proyecy
+function momo() {
+    write_title "26. Instalar Mono"
+    echo "El Instala el RunTime de Mono desde los Repo Oficial."
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+    echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
+    echo "deb http://download.mono-project.com/repo/debian wheezy-apache24-compat main" | sudo tee -a /etc/apt/sources.list.d/mono-xamarin.list
+    sudo apt-update
+    sudo apt-get install mono-complete
+    sudo apt-get install mono-devel 
+    sudo apt-get install referenceassemblies-pcl 
+    say_done
+}
 
+# 27. Mono Proyecy
+function hamachi() {
+    write_title "27. Instalar Hamachi VON"
+    echo "Instala el hamchi VPN "
+    wget https://secure.logmein.com/labs/logmein-hamachi_2.1.0.136-1_i386.deb
+    sudo dpkg –install logmein-hamachi_2.1.0.136-1_i386.deb
+    sudo apt-get install lsb-core
+    apt-get -f install
+    say_done
+}
 is_root_user                    #  0. Verificar si es usuario root o no
 set_hostname                    #  1. Configurar Hostname
 set_hour                        #  2. Configurar zona horaria
@@ -361,5 +386,7 @@ tunning_nano                    # 22. Tunnear Nano
 add_updating_task               # 23. Agregar tarea de actualización diaria
 add_commands                    # 24. Agregar comandos personalizados
 install_portsentry              # 25. Instalar PortSentry
-final_step                      # 26. Reiniciar servidor
+mono                            # 26. Install Mono
+hamachi                         # 27. Hamabi VPN
+final_step                      # 28. Reiniciar servidor
 

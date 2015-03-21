@@ -137,7 +137,7 @@ function install_fail2ban() {
 function install_mysql() {
     write_title "11. Instalar MySQL"
     wget http://repo.mysql.com/mysql-apt-config_0.3.3-2ubuntu14.04_all.deb
-    sudo dpkg -i mysql-apt-config_0.3.2-1ubuntu14.04_all.deb
+    sudo dpkg -i mysql-apt-config_0.3.3-2ubuntu14.04_all.deb
     sudo apt-get update
     apt-get install mysql-server
     echo -n " configurando MySQL............ "
